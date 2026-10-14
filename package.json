@@ -10,7 +10,8 @@
     "start": "node server/index.js",
     "seed": "node server/seed.js",
     "test": "node --test server/*.test.js",
-    "test:actions": "node --test scripts/actions.test.mjs"
+    "test:actions": "node --test scripts/actions.test.mjs",
+    "hooks:install": "git config --local core.hooksPath .githooks"
   },
   "dependencies": {
     "react": "^19.0.0",

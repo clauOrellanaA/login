@@ -38,6 +38,10 @@ test('4. Repetir el seed conserva la identidad y la contrasena original', (t) =>
   assert.equal(verifyPassword('Cambio2026!', row.password_hash), false);
 });
 
-test('5. FALLO INTENCIONAL: demostracion de un test fallido en GitHub Actions', () => {
-  assert.fail('Fallo solicitado para demostrar GitHub Actions. Elimina este test cuando quieras que el workflow pase.');
+test('5. La base de datos rechaza sesiones de usuarios inexistentes', (t) => {
+  const db = openDatabase(':memory:');
+  t.after(() => db.close());
+  const insert = db.prepare('INSERT INTO sessions(token_hash, user_id, expires_at) VALUES (?, ?, ?)');
+  assert.throws(() => insert.run('token-de-prueba', 999, Date.now() + 1000), /FOREIGN KEY/);
+  assert.equal(db.prepare('SELECT count(*) AS total FROM sessions').get().total, 0);
 });

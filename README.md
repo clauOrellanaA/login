@@ -4,7 +4,11 @@
 
 El workflow `.github/workflows/tests.yml` se ejecuta al subir cambios, abrir un pull request o iniciarlo manualmente. Instala las dependencias, compila el frontend y ejecuta exactamente cinco tests con `npm run test:actions`.
 
-Cuatro tests deben pasar y el quinto falla intencionalmente para demostrar un fallo en Actions. Por eso el workflow termina en rojo. Para dejarlo en verde, elimina el quinto test de `scripts/actions.test.mjs`. Las ocho pruebas existentes siguen disponibles mediante `npm test`.
+Los cinco tests deben pasar. El quinto comprueba que SQLite rechaza sesiones de usuarios inexistentes y reemplaza el fallo intencional de la demostracion inicial. Las ocho pruebas existentes siguen disponibles mediante `npm test`.
+
+## Hook de Git
+
+Ejecuta `npm run hooks:install` una vez en cada clon para activar `.githooks/pre-commit`. Antes de cada commit, el hook sustituye el bloque exacto del fallo intencional original por la quinta prueba de integridad de sesiones, agrega esa correccion al commit y ejecuta las cinco pruebas de Actions y las ocho existentes. Si alguna falla, bloquea el commit. Si el archivo de pruebas tiene cambios sin agregar, pide ejecutar `git add scripts/actions.test.mjs` antes de corregirlo. Otros fallos requieren corregir el codigo correspondiente.
 
 React + Vite, servidor Node.js y SQLite. Requiere Node.js 24 o superior.
 

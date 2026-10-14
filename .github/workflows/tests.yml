@@ -1,4 +1,4 @@
-name: Cinco tests (un fallo intencional)
+name: Cinco tests
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   tests:
-    name: Cuatro tests correctos y uno fallido
+    name: Pruebas de autenticacion y base de datos
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -25,5 +25,5 @@ jobs:
         run: npm ci
       - name: Compilar frontend
         run: npm run build
-      - name: Ejecutar cinco tests (uno falla intencionalmente)
+      - name: Ejecutar cinco tests
         run: npm run test:actions
