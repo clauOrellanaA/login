@@ -1,0 +1,11 @@
+node_modules/
+.npm-cache/
+dist/
+data/
+.env
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+.codex/
+.env.*
+!.env.example
